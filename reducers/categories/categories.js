@@ -1,10 +1,4 @@
-
-const initialState =  [{id: 'c4', name: 'Phones'}, 
-{id:'c2', name: 'Laptops'}, 
-{id: 'c3', name: 'Watches'}]
-
-
-const categories = (state = initialState, action) => {
+const categories = (state = [], action) => {
         switch(action.type){
             case 'FETCH_CATEGORIES_SUCCESS':
                 state = action.payload;

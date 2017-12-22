@@ -1,6 +1,6 @@
 export function fetchProducts() {
     return function (dispatch) {
-        fetch('http://bestlab.us:8080/products')
+        fetch('http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/products')
             .then((res) => { return res.json() })
             .then((data) => {
                 dispatch({
@@ -14,7 +14,7 @@ export function fetchProducts() {
 
 export function addProduct(product) {
     return (dispatch) => {
-        fetch('http://bestlab.us:8080/products', {
+        fetch('http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/products', {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -28,13 +28,13 @@ export function addProduct(product) {
                     type: 'ADD_PRODUCT',
                     payload: data
                 })
-        })
+            })
     }
 };
 
 export function deleteProduct(_id) {
     return (dispatch) => {
-        fetch(`http://bestlab.us:8080/products/${_id}`, {
+        fetch(`http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/products/${_id}`, {
             method: 'DELETE',
         })
             .then((res) => { return res.json() })
@@ -47,7 +47,7 @@ export function deleteProduct(_id) {
 
 export function updateProduct(product) {
     return (dispatch) => {
-        fetch('http://bestlab.us:8080/products', {
+        fetch(`http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/products/${product._id}`, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export function updateProduct(product) {
 
 export function getProduct(_id) {
     return (dispatch) => {
-        fetch(`http://bestlab.us:8080/products/${_id}`, {
+        fetch(`http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/products/${_id}`, {
             method: 'GET',
         })
             .then((res) => { return res.json() })
@@ -75,7 +75,7 @@ export function getProduct(_id) {
                     type: 'EDIT_PRODUCT',
                     payload: data
                 })
-            })
+        })
     }
 };
 

@@ -11,7 +11,6 @@ export default class ProductForm extends React.Component {
             brand: '',
             producer: '',
             imageUrl: '',
-            edit: false,
             productType: ''
         }
     }
@@ -28,7 +27,7 @@ export default class ProductForm extends React.Component {
     }
 
     handleSave(e) {
-        if (!this.state.edit) {
+        if(this.state._id === undefined || this.state._id === null) {
             e.preventDefault();
             this.props.addProduct(this.state);
             this.props.resetProduct();
@@ -51,7 +50,7 @@ export default class ProductForm extends React.Component {
         return (
             <div className='card'>
                 <div className='card-header text-center bg-primary text-white'>
-                    {!this.state.edit ? 'Add Product' : 'Edit Product'}
+                    {!this.state._id ? 'Add Product' : 'Edit Product'}
                     <span className='fa fa-times float-right' onClick={this.props.closeForm.bind(this)}></span>
                 </div>
                 <div className='card-body'>
@@ -107,8 +106,10 @@ export default class ProductForm extends React.Component {
                         <div className="form-group">
                             <label>Select Category:</label>
                             <select className="form-control" name='productType' onChange={this.handleChange.bind(this)}>
-                                <option defaultValue hidden>Choose here</option>
-                                {this.props.categories.map((c, index) => <option key={index} value={c.id}>
+                                <option defaultValue selected>Choose here</option>
+                                
+                                {this.props.categories.map((c, index) => 
+                                <option key={index} selected={this.state.productType === c.id} value={c.id}>
                                     {c.name}
                                 </option>)}
                             </select>

@@ -9,9 +9,19 @@ export default class CustomerDetail extends React.Component {
             address: '',
             email: '',
             phone: '',
-            products: this.props.oneCart
+            products: '',
+            total: 0
+        };
+    }
 
+    componentWillReceiveProps(props){
+        if(props.oneCart.length > 0) {
+            var totalPrice = 0;
+            for (let i = 0; i < props.oneCart.length; i++) {
+                totalPrice += parseFloat(props.oneCart[i].product.price) * parseFloat(props.oneCart[i].quantity)
+            }
         }
+        this.setState({products: props.oneCart, total: totalPrice});
     }
 
     handleChange(e) {
@@ -52,10 +62,10 @@ export default class CustomerDetail extends React.Component {
             alert('There are no items in cart')
             valid = false;
         }
-        return valid
+        return valid;
     }
 
-    handleSubmitOrder(e) {
+    handleSubmitOrder() {
         if (this.validateInfo()) {
             this.props.addNewCart(this.state);
             this.setState({
@@ -63,12 +73,12 @@ export default class CustomerDetail extends React.Component {
                 address: '',
                 email: '',
                 phone: '',
-                products: this.props.resetCart()
-            })
+                products: this.props.resetCart(),
+                total: 0
+            });
             alert('Your order is submitted. Thank you for choosing SuperPhone.')
         }
     }
-
     render() {
         return (
             <div className='card'>

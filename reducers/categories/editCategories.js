@@ -1,9 +1,9 @@
-const editCategories = (state = {}, action) => {
+const editCategories = (state = {id: '', name: ''}, action) => {
     switch(action.type){
         case 'RESET_CATEGORY':
-            return {id: '', name: '', edit: false};
+            return {id: '', name: ''};
         case 'EDIT_CATEGORY':
-            return Object.assign({}, action.payload, {edit: true});
+            return action.payload;
         default: 
             return state;
     }

@@ -3,18 +3,19 @@ import { connect } from 'react-redux';
 import './style/style-page.css';
 
 //Admin components
-import { AdminNavBar } from './admin/components/header/AdminNavBar.jsx';
-import { AdminHome } from './admin/components/home/AdminHome.jsx';
-import AdminCategoryPage from './admin/components/categories-components/AdminCategoryPage.jsx';
-import AdminView from './admin/components/products-components/AdminView.jsx';
-import AdminProductPage from './admin/components/products-components/AdminProductPage.jsx';
+import { AdminNavBar } from './admin/navbar/AdminNavBar.jsx';
+import { AdminHome } from './admin/home/AdminHome.jsx';
+import AdminCategoryPage from './admin/categories-components/AdminCategoryPage.jsx';
+import AdminView from './admin/products-components/AdminView.jsx';
+import AdminProductPage from './admin/products-components/AdminProductPage.jsx';
+import AdminOrderPage from './admin/orders/AdminOrderPage.jsx';
 
 //User Interface components
 import { Header } from './user/components/Header.jsx';
 import App from './user/components/App.jsx';
 import { About } from './user/components/About.jsx';
 import CheckoutPage from './shopping-cart/CheckoutPage.jsx';
-import ProductDetail from './user/components/ProductDetail.jsx'
+import ProductDetail from './user/products/ProductDetail.jsx'
 
 //actions for products
 import {
@@ -28,7 +29,7 @@ import {
 
 //actions for shopping cart
 import {
-    addNewCart, addToCart, deleteCartItem, resetCart
+    addNewCart, addToCart, deleteCartItem, resetCart, fetchCarts, deleteCart, updateCart, getCart, clearForm
 } from './action/shopping-cart-actions.js';
 
 //actions for form
@@ -38,13 +39,14 @@ class Root extends React.Component {
     componentDidMount() {
         this.props.fetchProducts();
         this.props.fetchCategories();
+        this.props.fetchCarts();
     }
     render() {
         let currentPath = window.location.pathname;
         let productURL = this.props.products.filter((p) => currentPath.includes(p._id))
         let idURL;
-        for(let i = 0; i < productURL.length; i++) {
-            if(productURL[i]._id !== '') {
+        for (let i = 0; i < productURL.length; i++) {
+            if (productURL[i]._id !== '') {
                 productURL = productURL[i];
                 idURL = productURL._id
                 break;
@@ -61,7 +63,6 @@ class Root extends React.Component {
 
                         : currentPath.includes('/adminview') ?
                             <AdminView products={this.props.products}
-                                fetchProducts={this.props.fetchProducts}
                                 categories={this.props.categories}
                                 editProducts={this.props.editProducts} />
 
@@ -96,24 +97,32 @@ class Root extends React.Component {
                                         <About />
 
                                         : currentPath.includes('/checkout') ?
-                                            <CheckoutPage carts={this.props.carts}
-                                                oneCart={this.props.oneCart}
+                                            <CheckoutPage oneCart={this.props.oneCart}
                                                 addToCart={this.props.addToCart}
                                                 deleteCartItem={this.props.deleteCartItem}
                                                 resetCart={this.props.resetCart}
                                                 addNewCart={this.props.addNewCart} />
 
                                             : currentPath.includes(idURL) ?
-                                                <ProductDetail product={productURL} 
-                                                        addToCart={this.props.addToCart}/>
+                                                <ProductDetail product={productURL}
+                                                    addToCart={this.props.addToCart} />
 
-                                                : <App products={this.props.products}
-                                                    categories={this.props.categories}
-                                                    carts={this.props.carts}
-                                                    addToCart={this.props.addToCart}
-                                                    deleteCartItem={this.props.deleteCartItem}
-                                                    addNewCart={this.props.addNewCart}
-                                                />
+                                                : currentPath.includes('/adminorder') ?
+                                                    <AdminOrderPage carts = {this.props.carts} 
+                                                                    editCarts={this.props.editCarts}
+                                                                    getCart={this.props.getCart}
+                                                                    deleteCart={this.props.deleteCart} 
+                                                                    updateCart={this.props.updateCart}
+                                                                    clearForm={this.props.clearForm}/>
+
+                                                    : <App
+                                                        oneCart={this.props.oneCart} 
+                                                        products={this.props.products}
+                                                        categories={this.props.categories}
+                                                        carts={this.props.carts}
+                                                        addToCart={this.props.addToCart}
+                                                        deleteCartItem={this.props.deleteCartItem}
+                                                        addNewCart={this.props.addNewCart} />
                     }
                 </div>
             </div>
@@ -136,7 +145,8 @@ const mapStateToProps = (state) => {
 
         //cart state
         carts: state.carts,
-        oneCart: state.oneCart
+        oneCart: state.oneCart,
+        editCarts: state.editCarts
     };
 };
 
@@ -173,14 +183,20 @@ const mapDispatchToProps = (dispatch) => {
         openEditForm: () => { dispatch(openEditForm()); },
 
         //dispatch actions for shopping cart
+        fetchCarts: () => { dispatch(fetchCarts()); },
         addToCart: (product, quantity) => { dispatch(addToCart(product, 1)); },
         deleteCartItem: (id) => {
             if (confirm('Do you really want to delete?')) {
                 dispatch(deleteCartItem(id));
             }
         },
-        addNewCart: (cart) => { dispatch(addNewCart(cart)) },
-        resetCart: () => { dispatch(resetCart()) }
+        addNewCart: (cart) => { dispatch(addNewCart(cart)); },
+        getCart: (_id) => { dispatch(getCart(_id)); },
+        deleteCart: (_id) => { dispatch(deleteCart(_id)); },
+        updateCart: (cart) => { dispatch(updateCart(cart)); },
+        resetCart: () => { dispatch(resetCart()); },
+        clearForm: () => { dispatch(clearForm()); }
+
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Root);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdminNavBar } from '../header/AdminNavBar.jsx';
+import { AdminNavBar } from '../navbar/AdminNavBar.jsx';
 
 export const AdminHome = (props) => {
     return (
@@ -11,11 +11,11 @@ export const AdminHome = (props) => {
                 <div className='content'>
                     <div className="container">
                         <h1>Welcome to Admin Mode</h1>
-                        <p>You can create, read, update, and delete here.</p>
+                        <p>You can create, read, update, delete products, categories, and orders here.</p>
                         <p>Click <b>View</b> for general view</p>
-                        <p>Click <b>Product Management</b> for product system</p>
-                        <p>Click <b>Category Management</b> for category system</p>
-                        <p></p>
+                        <p>Click <b>Products</b> for product system</p>
+                        <p>Click <b>Categories</b> for category system</p>
+                        <p>Click <b>Oders</b> for order system</p>
                     </div>
                 </div>
             </div>

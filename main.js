@@ -10,6 +10,7 @@ import categories from './reducers/categories/categories.js';
 import editCategories from './reducers/categories/editCategories.js';
 import formDisplay from './reducers/form/formDisplay';
 import {carts, oneCart} from './reducers/shopping-cart/carts.js';
+import {editCarts} from './reducers/shopping-cart/editCarts.js'
 import {loadState, saveState} from './localStorage.js';
 // import { createLogger, logger } from 'redux-logger';
 
@@ -24,7 +25,8 @@ const store =  createStore(
         categories, 
         editCategories,
         carts,
-        oneCart
+        oneCart,
+        editCarts
     }), 
     persistedState,
     applyMiddleware(thunk));

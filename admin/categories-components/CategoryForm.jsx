@@ -5,8 +5,7 @@ export default class CategoryForm extends React.Component {
         super();
         this.state = {
             id: '',
-            name: '',
-            edit: false
+            name: ''
         }
     }
 
@@ -23,7 +22,7 @@ export default class CategoryForm extends React.Component {
     }
 
     handleSave(e) {
-        if (!this.state.edit) {
+        if(this.state._id === undefined || this.state._id === null) {
             e.preventDefault();
             this.props.addCategory(this.state);
             this.props.resetCategory();
@@ -37,8 +36,7 @@ export default class CategoryForm extends React.Component {
         }
 
         this.setState({
-            id: '', name: '',
-            edit: false
+            id: '', name: ''
         });
     }
 
@@ -51,7 +49,7 @@ export default class CategoryForm extends React.Component {
         return (
             <div className='card'>
                 <div className='card-header text-center bg-primary text-white'>
-                    {!this.state.edit ? 'Add Category' : 'Edit Category'}
+                    {!this.state._id ? 'Add Category' : 'Edit Category'}
                     <span className='fa fa-times float-right' onClick={this.props.closeForm.bind(this)}></span>
                 </div>
                 <div className='card-body'>
@@ -84,6 +82,5 @@ export default class CategoryForm extends React.Component {
                 </div>
             </div>
         );
-
     }
 }

@@ -12,7 +12,7 @@ export class Header extends React.Component {
             }
         }
         return countItem;
-    }
+    };
     render() {
         return (
             <nav className='navbar navbar-inverse bg-dark fixed-top navbar-expand-md user-header'>

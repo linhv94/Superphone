@@ -1,6 +1,6 @@
 import React from 'react';
 import {Carousel} from './Carousel.jsx';
-import ProductPage from './ProductPage.jsx';
+import ProductPage from '../products/ProductPage.jsx';
 
 
 export default class App extends React.Component {

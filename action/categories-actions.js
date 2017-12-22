@@ -1,6 +1,6 @@
 export function fetchCategories() {
     return (dispatch) => {
-        fetch('http://bestlab.us:8080/productTypes')
+        fetch('http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/productTypes')
             .then((res) => { return res.json() })
             .then((data) => {
                 dispatch({
@@ -14,7 +14,7 @@ export function fetchCategories() {
 
 export function addCategory(category) {
     return (dispatch) => {
-        fetch('http://bestlab.us:8080/productTypes', {
+        fetch('http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/productTypes', {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export function addCategory(category) {
 
 export function deleteCategory(_id) {
     return (dispatch) => {
-        fetch(` http://bestlab.us:8080/productTypes/${_id}`, {
+        fetch(`http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/productTypes/${_id}`, {
             method: 'DELETE',
         })
             .then((res) => { return res.json() })
@@ -46,8 +46,8 @@ export function deleteCategory(_id) {
 
 export function updateCategory(category) {
     return (dispatch) => {
-        console.log(category)
-        fetch('http://bestlab.us:8080/productTypes', {
+        console.log(category);
+        fetch(`http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/productTypes/${category._id}`, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ export function updateCategory(category) {
 
 export function getCategory(_id) {
     return (dispatch) => {
-        fetch(`http://bestlab.us:8080/productTypes/${_id}`, {
+        fetch(`http://ec2-18-217-254-83.us-east-2.compute.amazonaws.com:8080/productTypes/${_id}`, {
             method: 'GET',
         })
             .then((res) => { return res.json() })

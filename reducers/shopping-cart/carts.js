@@ -17,12 +17,13 @@ export const oneCart = (state = [], action) => {
                 console.log(newState);
                 return newState;
             }
-        case 'DELETE_CART_ITEM':
-            return state.filter((c) => c.product.id !== action.payload);
-        case 'RESET_CART':
+        case 'RESET_CART': {
             state = [];
             console.log(state);
             return state;
+        }
+        case 'DELETE_CART_ITEM':
+            return state.filter((c) => c.product.id !== action.payload);
         default:
             return state;
     }
@@ -31,6 +32,7 @@ export const oneCart = (state = [], action) => {
 //check if a product exist in the cart or not
 const findProductInCart = (cart, product) => {
     if (cart.length > 0) {
+        console.log(cart)
         for (let i = 0; i < cart.length; i++) {
             if (cart[i].product.id === product.id) {
                 return i
@@ -39,18 +41,6 @@ const findProductInCart = (cart, product) => {
     }
     return -1;
 }
-
-//count items in cart, so it can display on top of the product page; 
-export const countItemInCart = (cart) => {
-    let countItem = 0;
-    if (cart.length > 0) {
-        for (let i = 0; i < cart.length; i++) {
-            countItem += cart[i].quantity
-        }
-    }
-    return countItem;
-}
-
 
 //carts reducer is not in the requirement, save it for later assignment
 export const carts = (state = [], action) => {

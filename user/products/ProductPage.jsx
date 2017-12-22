@@ -1,6 +1,6 @@
 import React from 'react';
-import {GridView} from './GridView.jsx';
-import {ListView} from './ListView.jsx';
+import {GridView} from '../components/GridView.jsx';
+import {ListView} from '../components/ListView.jsx';
 
 export default class ProductPage extends React.Component {
     constructor(props) {

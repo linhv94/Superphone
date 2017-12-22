@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdminNavBar } from '../header/AdminNavBar.jsx';
+import { AdminNavBar } from '../navbar/AdminNavBar.jsx';
 
 export default class AdminView extends React.Component {
     constructor(props) {

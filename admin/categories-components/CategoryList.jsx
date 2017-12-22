@@ -27,16 +27,15 @@ export default class CategoryList extends React.Component {
                                             <td>{c.id}</td>
                                             <td>{c.name}</td>
                                 
-                                            <td className='text-center'>
-                                                <button type='button' className='btn btn-info'
-                                                    onClick={() => this.handleEdit(c._id)}>
-                                                    <span className='fa fa-pencil-square-o'></span> Edit
-                                            </button>
-                                                &nbsp;
-        
+                                            <td>
                                             <button type='button' className='btn btn-danger'
                                                     onClick={() => this.props.deleteCategory(c._id)}>
                                                     <span className='fa fa-trash-o'></span> Delete
+                                            </button>
+                                            &nbsp;
+                                                <button type='button' className='btn btn-info'
+                                                    onClick={() => this.handleEdit(c._id)}>
+                                                    <span className='fa fa-pencil-square-o'></span> Edit
                                             </button>
                                             </td>
                                         </tr>
